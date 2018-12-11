@@ -1,0 +1,11 @@
+name: Salma Bouslama
+output_dir: '.'
+output:
+  html_document:
+    theme: yeti
+    highlight: pygments
+    include:
+      
+    css: style.css
+    lib_dir: site_libs
+    self_contained: no
