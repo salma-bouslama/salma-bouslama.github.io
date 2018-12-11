@@ -73,19 +73,20 @@ output:
  <h4>Time series: The monthly evolution of chicken’s production in Tunisia</h4>
 <span><i class="fa fa-calendar"></i> _2018-07_ / _2018-08_</span>
 <p>GIPAC, Tunis</p>
-<a class="btn btn-outline-primary btn-sm" href="talk-2018-09-ucla-cpl.html" role="button">See</a>
+<a class="btn btn-outline-primary btn-sm" href="talk-2018-09-ucla-cpl.html" role="button">See shiny</a>
 </div>
 
 </article>
 
 <br>
 
+
 <article>
 <h3><a href="Projects.html">Acadamic Projects</a></h3>
 <div class="summary">
 <h4>Maps of Tunisia</h4>
 <span><i class="fa fa-calendar"></i> _2018-12_</span>
-<a class="btn btn-outline-primary btn-sm" href="https://salmabouslama.shinyapps.io/Tunisia/" role="button">See</a>
+<a class="btn btn-outline-primary btn-sm" href="https://salmabouslama.shinyapps.io/Tunisia/" role="button">See dashboard</a>
 </div>
 </article>
 
