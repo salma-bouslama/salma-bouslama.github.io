@@ -1,0 +1,97 @@
+---
+title: " salma bouslama "
+output:
+  html_document:
+    excludes:
+      before_body: _navbar.html
+    includes:
+      before_body: navbar_home.html
+      
+---
+<nobr>
+<center>
+<img  src="image/AI.png" width="100px" height="auto">
+<img  src="image/looop.jpg" width="100px" height="auto">
+<img  src="image/explore.png" width="100px" height="auto">
+<img  src="image/stat.jpg" width="100px" height="auto">
+<img  src="image/i.png" width="100px" height="auto">
+<img  src="image/cobba.jpg" width="100px" height="auto">
+<img  src="image/courbe.jpg" width="100px" height="auto">
+<img  src="image/AAII.jpg" width="100px" height="auto">
+</center>
+</nobr>
+
+<h1><marquee direction="left"><center><FONT face="Chalkduster, fantasy"> "Data Analysis uses data to describe the PAST."  </FONT> </center></marquee></h1>
+<h1><marquee direction="right"><center><FONT face="Chalkduster, fantasy"> "Data Scientist uses data to describe the FUTURE."  </FONT> </center></marquee></h1>
+<br>
+<br>
+
+
+
+<a class="anchor" id="about"></a>
+
+<h1>ABOUT ME</h1>
+
+> Hello everyone!I'm a Third-Year Engineering student at [*the Higher School of Statistics and data Analysis*](http://www.essai.rnu.tn/accueil.htm) .Actually, I'm looking for a final internship to complete my training as a future Data Scientist. It's my first web site programming so i hope that you like it!
+
+<hr>
+<br>
+
+<br>
+<nobr>
+<img  src="image/salma2.jpg" width="300px" height="auto">
+<img src="image/computer.png"width="300px" height="auto" />
+<img src="image/salma.jpg"width="300px" height="auto" />
+</nobr>
+<br>
+
+<h3>THE BRIEF BIO</h3>
+
+<br>
+<ul>
+> <li>23 years old</li>
+<li>Tunisian student</li>
+<li>Data scientist, looking for a final internship</li>
+<li>Sport fan, especially Hiking and Fitness</li>
+<li>cinéma and photography lover</li>
+</ul>
+
+
+<br>
+
+
+<a class="anchor" id="blog-posts"></a>
+
+<h1>Projects</h1>
+
+<br>
+
+<article>
+
+<h3><a href="Projects.html">Internship Projects</a></h3>
+<div class="summary">
+ <h4>Time series: The monthly evolution of chicken’s production in Tunisia</h4>
+<span><i class="fa fa-calendar"></i> _2018-07_ / _2018-08_</span>
+<p>GIPAC, Tunis</p>
+<a class="btn btn-outline-primary btn-sm" href="talk-2018-09-ucla-cpl.html" role="button">See</a>
+</div>
+
+</article>
+
+<br>
+
+<article>
+<h3><a href="Projects.html">Acadamic Projects</a></h3>
+<div class="summary">
+<h4>Maps of Tunisia</h4>
+<span><i class="fa fa-calendar"></i> _2018-12_</span>
+<a class="btn btn-outline-primary btn-sm" href="talk-2017-09-data-donuts.html" role="button">See</a>
+</div>
+</article>
+
+<a class="btn btn-outline-secondary btn-lg" href="Projects.html" role="button">All Projects</a>
+
+<br>
+<br>
+<br>
+

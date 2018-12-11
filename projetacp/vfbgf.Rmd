@@ -1,0 +1,154 @@
+---
+title: "projet ACP"  
+author: "Salma Bouslama"
+date: "4 mai 2017"
+
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## I-INTRODUCTION
+Dans ce projet, on va entamer ? une petite ?tude concernant un diagnostique de sant? comportant r?sultats diversifi?. Il est r?alis? sur un ?chantillon de patients de taille 80 personnes ayant de diff?rents ?ges.  
+Le but de ce projet est d'en tirer quelques interpr?tations utiles entre les diff?rentes r?sultats du diagnostique.
+
+
+##II-OBJECTIF 
+L'objectif de ce projet est d'?tudier la base ? her ? ainsi que de r?aliser son ACP:
+Voir la corr?lation du taux de cholest?rol ? chol ? avec les autres variables.
+Par exemple ? quoi est-il li?, d?pend t-il d'un ?ge pr?cis ?
+
+
+## III-NOM DE LA BASE DE DONNEE: "HER"
+
+## IV-DESCRIPTION
+
+Les donn?es proviennent du D?partement am?ricain de la sant? et des services humains, Centre national des statistiques de sant?, troisi?me enqu?te nationale pour l'examen de la sant? et de l'alimentation (Health Exam Results en anglais, d'o? les initiales HER pour le dossier).
+Ces donn?es font partie des "datasets" utilis?s comme exemples dans l'ouvrageBiostatistics for the Biological and Health Sciences de Marc TRIOLA et Mario TRIOLA, que nous avons eu l'honneur de traduire pour les ?ditions Pearson. 
+
+##variable: 
+1 / IDEN    est un identificateur de ligne,  
+ 2 / SEXE    est cod? 0 pour Homme et 1 pour Femme,  
+3 / AGE     est en ann?es,  
+ 4 / TAILLE  est la taille (cm),   
+ 5 / POIDS   est le poids (kg),  
+6 / TTAILLE est le tour de taille (cm),  
+7 / POULS   est le taux de battements (pulsations par minute),  
+ 8 / SYS     est la pression sanguine systolique (mmHg),  
+9 / DIA     est la pression sanguine diastolique (mmHg),  
+10 / CHOL    est le taux de cholest?rol (mg),  
+11 / IMC     est l'indice de masse corporelle (kg/m^2),  
+12 / JMBG    est la longueur de la jambe gauche (cm),  
+ 13 / COUD    est la largeur du coude (cm),  
+ 14 / POIGN   est la largeur du poignet (cm),  
+15 / BRAS    est la circonf?rence du bras (cm).  
+16 / classement des ages par intervalle :***"jeune" "adulte" "vieux"***
+
+##V-STATISTIQUE DESCRIPTIVE
+
+1)importation de la base de donn?e:
+
+```{r }
+setwd("C:/Users/USER/Documents/R/salma-bouslama.github.io/projetacp")
+her=read.csv("TP_projet1.csv",header=T,sep=";")
+```
+2)r?sum? statistique:
+```{r}
+str(her)
+```
+
+```{r}
+summary(her)
+```
+
+##VI-PRETRAITEMENT
+enl?vement des variables inutiles comme le sexe et le num?ro du patient et l'age en valeur r?el
+```{r}
+her<-her[,c(-1,-2)]
+her<-her[,-1]
+```
+
+## VII-ETUDE DE LA QUALITE DE L'ACP
+chargement des librairies
+```{r,warning=FALSE}
+library(FactoMineR)
+library(factoextra)
+library(ggplot2)
+```
+
+analyse des valeurs propres
+```{r}
+acp<-PCA(her,scale.unit = TRUE,quali.sup =13,quanti.sup = 7,ncp = 3,graph = FALSE)
+acp$eig
+```
+  
+    
+```{r}
+fviz_screeplot(acp,choice="eigenvalue",addlabels=TRUE)
+```
+->on peut v?rifier en premier lieu que les trois premi?res valeurs propres sont sup?rieures ? 1, mais on peut se satisfaire des deux premiers axes puisqu'ils repr?sentent 71.3% de l'information disponible,donc l'exploration des donn?es va se reposer sur ces trois axes.  
+En deuxi?me lieu,il y a la pr?sence d'un effet de coude en se basant sur l'?boulis des valeurs propres.  
+  
+  
+Nuage des points des individus:
+```{r}
+fviz_pca_ind(acp, col.ind="contrib")+
+  scale_color_gradient2(low="white", mid="blue", high="red",midpoint=0.4) + theme_minimal()
+```
+
+
+```{r,warning=FALSE}
+plot(acp,habillage =13, choix = "ind")
+```
+cercle de corr?lation:
+selon le cos^2
+```{r}
+fviz_pca_var(acp, col.var="cos2")+
+  scale_color_gradient2(low="white", mid="blue", high="red",midpoint=0.6) + theme_minimal()
+``` 
+
+cercle de corr?lation selon la contribution:
+```{r}
+acp$var$contrib
+```
+
+
+```{r,warning=FALSE}
+fviz_pca_var(acp, col.var="contrib")+
+  scale_color_gradient2(low="white", mid="blue", high="red",midpoint=0.6) + theme_minimal()
+```
+
+Effectuer un habillage selon la variable cat?gor?ielle et tracer les ?llipses de confiance:
+```{r,warning=FALSE}
+fviz_pca(acp,habillage = 13,label = TRUE ,addEllipses = TRUE)
+```
+
+effectuer une superposition du plot de variables et d'individus:
+```{r,warning=FALSE}
+fviz_pca(acp,habillage = 13)
+```
+
+## VIII-INTERPRETATION
+-En jetant un coup d'oil sur le cercle de corr?lation et dans le but de d?terminer la bonne repr?sentation des variables, on v?rifie que les deux axes principaux contiennent respectivement 51.3% et 20% de l'information totale.  
+-Les variables poids, ttaille, bras et coude sont les indicateurs caract?ristiques de la recherche scientifique contribuent le plus au premier axe avec des valeurs respectives de 16.5, 14.46 , 13.31 et 13,19.  
+  
+En exploitant les r?sultats obtenu ? travers le cercle de corr?lation, on trouve que :  
+-**On remarque que toutes les variables sont plus ou moins d?pendante sauf les battements du cour.**  
+-Les variables : cholest?rol et poids sont fortement corr?l?s : r?sultat attendu puisque l'augmentation de poids est un vrai indicateur d'ob?sit?. En effet, scientifiquement, les personnes maigres risquent moins d'acqu?rir une hypercholest?rol?mie et inversement.
+-Les variables: cholest?rol, tour de taille "ttaille",la pression sanguine systolique "sys" et diastolique "dia" sont plus ou moins corr?l?s: cela est bien ?vident scientifiquement car les contractions et rel?chement du cour peuvent ?tre des cons?quences d'une hypercholest?rol?mie.  Ainsi que pour le tour de taille qui augmentera en fonction du surpoids de la personne.  
+-La variable cholest?rol n'a aucun effet sur les battement du cour donc elle sont ind?pendantes vue aussi qu'il sont pas corr?l?s (plus que perpendiculaires).  
+  
+En exploitant les r?sultats obtenu ? travers le nuage de point, on trouve que :  
+-**dans cet ?chantillon, l'effectif des jeunes est le plus ?lev? tandis que les vieux repr?sentent le nombre le plus faible.**  
+-On constate que les jeunes sont les moins touch?s par ce diagnostique puisque leur classe d'?ge est inversement corr?l?e avec les variables poids, cholest?rol...Mais ils ont tendance ? avoir une grande taille, des jambes plus langues plus que les deux autres cat?gories.  
+-Les adultes se r?partissent d'une mani?re r?gul?rent en formant une ellipse sous forme d'un cercle situ?e au milieu.  
+-Alors que les vieillards bien qu'ils soient une minoritaire dans cet ?chantillon, ont tendance ? avoir une hypercholest?rol?mie, une pression sanguine plus importante.   
+
+
+##CONCLUSION
+L'objectif de cette ?tude ?tait d'explorer et d'exploiter un jeu de donn?e dont la variable ? expliquer est "chol" (cholest?rol) en fonction d'autres variables explicatives.  
+  
+le r?sultat nous a permis de classer le cholest?rol pour les personnes les plus ?ges. Aussi, il peut ?tre engendr? par le gain d'un poids suppl?mentaire au cours du temps.  
+Mais, n'oublions par que m?me d'autres maladies peuvent causer une hypercholest?rol?mie ou bien existe t-il un facteur biologique qui favorise le terrain de la maladie?  

@@ -1,0 +1,91 @@
+---
+title: "projet ACP"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll
+---
+page1
+================================================
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(FactoMineR)
+library(factoextra)
+library(ggplot2)
+```
+
+row {data-width=650}
+-----------------------------------------------------------------------
+
+### Jeu de données: her
+les 6 premières lignes
+```{r}
+setwd("C:/Users/USER/Desktop/acp/projet")
+her1=read.csv("TP_projet1.csv",header=T,sep=";")
+her<-her1[,c(-1,-2)]
+her<-her[,-1]
+head(her)
+```
+les 6 dérnières lignes
+```{r}
+tail(her)
+```
+Column {data-width=350}
+------------------------------
+### étude statistique
+summary(her)
+```{r}
+summary(her)
+```
+### étude statistique
+str(her)
+```{r}
+str(her)
+```
+Column {data-width=350}
+-------------------------------------------
+### graphique : boxplot du taux de cholestérol par age
+```{r}
+p <- ggplot(her, aes(factor(her$age1), her$chol))
+p + geom_boxplot(aes(fill=factor(her$age1)))+xlab("les classes d'age")+ ylab("taux de cholestérol ")+ 
+theme(axis.text.y = element_text(colour = "black",size=15),
+         legend.position="none",
+         axis.title.x= element_text(colour = "black",size=18),
+         axis.title.y= element_text(colour = "black",size=18),
+         axis.text.x = element_text(colour = "black",size=18))
+```
+
+page 2
+================================================
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### les composantes principales
+
+
+```{r}
+acp<-PCA(her,scale.unit = TRUE,quali.sup =13,quanti.sup = 7,ncp = 3,graph = FALSE)
+fviz_screeplot(acp,choice="eigenvalue",addlabels=TRUE)
+```
+
+### cercle de corrélation selon la contribution
+
+```{r}
+fviz_pca_var(acp, col.var="contrib")+
+  scale_color_gradient2(low="white", mid="blue", high="red",midpoint=0.6) + theme_minimal()
+
+```
+
+Column {data-width=350}
+-------------------------------------------------------------------------
+### Nuage des points des individus:
+```{r}
+plot(acp,habillage =13, choix = "ind")
+```
+
+### Effectuer un habillage selon la variable catégoréielle et tracer les éllipses de confiance:
+```{r}
+fviz_pca(acp,habillage = 13,label = TRUE,addEllipses = TRUE)
+
+```
