@@ -48,7 +48,7 @@ title: "Projects"
  <h4>Time series: The monthly evolution of chicken’s production in Tunisia</h4>
 <span><i class="fa fa-calendar"></i> _2018-07_ / _2018-08_</span>
 <p>GIPAC, Tunis
-<a class="btn btn-outline-primary btn-sm" href="talk-2018-09-ucla-cpl.html" role="button">See shiny</a></p>
+<a class="btn btn-outline-primary btn-sm" href="https://salmabouslama.shinyapps.io/timeeseries/" role="button">See shiny</a></p>
 </div>
 
 <div class="summary">
